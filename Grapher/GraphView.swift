@@ -8,38 +8,32 @@
 
 import UIKit
 
+// Struct to keep track of parameters
 struct WaveParams {
-    var offsetX: Int
-    var offsetY: Int
+    var offsetX: Double
+    var offsetY: Double
     var stretchX: Double
     var stretchY: Double
+    var resolution: Double
 }
 
 class GraphView: UIView {
     
-    
-    
-    struct Stroke {
-        var firstPoint: CGPoint
-        var lastPoint: CGPoint
-    }
-    
-    var strokes: [Stroke] = [Stroke]()
+    // Declare variables
+    var points: [CGPoint] = [CGPoint]()
     var strokeColor = UIColor.black.cgColor
-    var width: Float = 0
+    var width: Double = 0
     
+    // Empties points array and refills it based on given wave parameters
     func getPoints (wave: WaveParams) {
-        strokes = []
-        let mult: Double = 0.125
-        for n in 0...Int(width / Float(mult)) {
-            var stroke: Stroke = Stroke(firstPoint: CGPoint(x: 0, y: 0), lastPoint: CGPoint(x: 0,y: 0))
-            var val: Double = mult * Double(n)
-            stroke.firstPoint = CGPoint(x: Double(val), y: Double(wave.offsetY) + wave.stretchY * sin(Double(wave.offsetX) - val / wave.stretchX))
-            val += Double(mult / 2)
-            stroke.lastPoint = CGPoint(x: Double(val), y: Double(wave.offsetY) + wave.stretchY * sin(Double(wave.offsetX) - val / wave.stretchX))
-            strokes.append(stroke)
-            setNeedsDisplay()
+        points = []
+        for i in 0...Int(width * wave.resolution) {
+            let x: Double = Double(i) / wave.resolution
+            let y: Double = wave.offsetY + wave.stretchY * sin((x - wave.offsetX) / wave.stretchX)
+            points.append(CGPoint(x: x, y: y))
         }
+        // Force the draw function to be called
+        setNeedsDisplay()
     }
     
     
@@ -49,10 +43,11 @@ class GraphView: UIView {
         ctx?.setLineWidth(4)
         ctx?.setLineCap(.round)
         
-        for stroke in strokes {
+        // Draw a line between a point and the next
+        for i in 0...(points.count - 2) {
             ctx?.beginPath()
-            ctx?.move(to: stroke.firstPoint)
-            ctx?.addLine(to: stroke.lastPoint)
+            ctx?.move(to: points[i])
+            ctx?.addLine(to: points[i + 1])
             ctx?.setStrokeColor(strokeColor)
             ctx?.strokePath()
         }

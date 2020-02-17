@@ -12,15 +12,17 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var graphView: GraphView!
     
-    var wave: WaveParams = WaveParams(offsetX: 0, offsetY: 250, stretchX: 10, stretchY: 10)
+    // Initial wave parameters
+    var wave: WaveParams = WaveParams(offsetX: 0, offsetY: 350, stretchX: 10, stretchY: 10, resolution: 1)
     
+    // Modify wave parameters when a slider is changed
     @IBAction func xOffset(_ sender: UISlider) {
-        wave.offsetX = Int(-sender.value)
+        wave.offsetX = Double(-sender.value)
         graphView.getPoints(wave: wave)
     }
     
     @IBAction func yOffset(_ sender: UISlider) {
-        wave.offsetY = Int(Float(500) - sender.value)
+        wave.offsetY = 350.0 - Double(sender.value)
         graphView.getPoints(wave: wave)
     }
     
@@ -34,10 +36,16 @@ class ViewController: UIViewController {
         graphView.getPoints(wave: wave)
     }
     
+    @IBAction func resolution(_ sender: UISlider) {
+        wave.resolution = Double(sender.value)
+        graphView.getPoints(wave: wave)
+    }
     
+    
+    // Get screen width and draw initial wave
     override func viewDidLoad() {
         super.viewDidLoad()
-        graphView.width = Float(graphView.bounds.width)
+        graphView.width = Double(graphView.bounds.width)
         graphView.getPoints(wave: wave)
         
         

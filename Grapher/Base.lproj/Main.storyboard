@@ -37,7 +37,7 @@
                                     <action selector="amplitude:" destination="BYZ-38-t0r" eventType="valueChanged" id="w42-cH-suV"/>
                                 </connections>
                             </slider>
-                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="250" minValue="0.0" maxValue="500" translatesAutoresizingMaskIntoConstraints="NO" id="jge-Rq-ZjI">
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="-250" maxValue="250" translatesAutoresizingMaskIntoConstraints="NO" id="jge-Rq-ZjI">
                                 <rect key="frame" x="-37" y="369" width="119" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <userDefinedRuntimeAttributes>
@@ -52,6 +52,16 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="xOffset:" destination="BYZ-38-t0r" eventType="valueChanged" id="ZYy-vE-MQg"/>
+                                </connections>
+                            </slider>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.25" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Pgw-eQ-RMM">
+                                <rect key="frame" x="294" y="476" width="119" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="layer.transform.rotation.z" value="-1.570795"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="resolution:" destination="BYZ-38-t0r" eventType="valueChanged" id="BvC-G8-1bq"/>
                                 </connections>
                             </slider>
                         </subviews>
